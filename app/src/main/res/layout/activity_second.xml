@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true">
 
     <!-- Toolbar with menu -->
     <androidx.appcompat.widget.Toolbar
@@ -16,10 +14,9 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:elevation="4dp" />
 
-    <!-- Google Map Fragment -->
-    <fragment
-        android:id="@+id/map"
+    <!-- ListView for API Data -->
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_height="match_parent" />
 </LinearLayout>

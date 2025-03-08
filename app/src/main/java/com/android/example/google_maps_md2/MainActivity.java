@@ -1,9 +1,13 @@
 package com.android.example.google_maps_md2;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -11,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set up toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Map");
 
         // Initialize fused location provider
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -98,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Toast.makeText(this, "Failed to get location. Try again.", Toast.LENGTH_SHORT).show();
                         }
                     });
-
         }
     }
 
@@ -126,5 +135,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setMessage(marker.getSnippet())
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_api_activity) {
+            // Navigate to SecondActivity
+            startActivity(new Intent(this, SecondActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
